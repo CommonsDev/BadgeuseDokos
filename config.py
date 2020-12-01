@@ -1,4 +1,14 @@
-dokos_client = "fd248be04120a03"
-dokos_token = "22692e4c7c209a2"
+# Dokos Client Key
+dokos_client = ""
+# Dokos Token Secret
+dokos_token = ""
 
-api_url = "https://hoppyurbanbrew.initiative.place/api/"
+# The URL of the API
+api_url = ""
+
+# The doctype name defined in Dokos
+badge_allocation_resource_name = ""
+passage_log_resource_name = ""
+
+#Could be None, In or Out
+badging_type = ""

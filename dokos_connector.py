@@ -21,6 +21,16 @@ class DokosConnector:
             'Accept': 'application/json'
         }
 
+    def insert_resource(self, resource, data):
+        """
+        Insert a resource
+
+        :param resource:  The DocType name
+        :param data: Data to be inserted, should be a json formatted String
+        :return: True if inserted, false if not
+        """
+        return requests.post(self.api_url + "resource/" + resource, data=data, headers=self.headers).status_code == 200
+
     def get_resources(self, resource):
         """
         Get a list of resources for the required DocType
