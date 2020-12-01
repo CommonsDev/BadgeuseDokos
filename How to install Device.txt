@@ -1,0 +1,6 @@
+EN
+To install the NFC card reader, you have to run the file InstallNFCDevice.sh in a console in root mode. For that execute the command "sudo bash InstallNFCDevice.sh".
+Your password is required to install softwares. Sometimes a confirmation is required to install softwares in this case you have to answer Y if the console ask you (Y/N):
+FR
+Pour installer le lecteur de cartes NFC, il vous suffit de lancer le fichier InstallNFCDevice.sh dans un terminal en mode super-utilisateur (root). Pour cela lancer la commande << sudo bash InstallNFCDevice.sh >>
+Votre mot de passe vous sera demandé pour installer les logiciels nécessaires. Pour installer ces logiciels il faut parfois que vous confirmer que vous voulez bien installer les logiciels pour cela si jamais on vous demande (O/N) : il suffit de mettre O ou Y si (Y/N):
