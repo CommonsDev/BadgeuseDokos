@@ -44,6 +44,7 @@ while WindowIsOpen:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			WindowIsOpen = False
+	StateOfCardReader=0
 	Window.fill(gray)
 	Window.blit(tuxImage,[10,10])
 	pygame.display.flip()
