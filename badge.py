@@ -70,7 +70,7 @@ while WindowIsOpen:
 	print(AuthError,StateOfCardReader)
 	
 	# Send the oldlog if the Dokos Server had problem
-	if SendOldLog and (time.time()-MomentOfNonSent<60):
+	if SendOldLog and (time.time()-MomentOfNonSent>60):
 		print("Test de l'envoie du log :",SendOldLog,time.time()-MomentOfNonSent)
 		Window.blit(DLImage,[10,10])
 		pygame.display.flip()
@@ -79,6 +79,7 @@ while WindowIsOpen:
 		FileToRead.close()
 		os.remove("HistoryOfPassage.log")
 		OldLogList = OldLogString.split("\n")
+		OldLogList.pop()
 		print(OldLogList)
 		StateOfCardReader = 3
 		AuthError = "Envoie des données locales au serveur"
