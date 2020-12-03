@@ -63,7 +63,7 @@ while WindowIsOpen:
 		UIDWithSpace = textShell.split(":")[1]
 		UIDWithoutSpace = UIDWithSpace.replace("  ",":").strip()
 		print(UIDWithoutSpace)
-		try:
+		"""try:
 			auth = Authentication(rfid=UIDWithoutSpace)
 			auth.add_passage_to_log()
 		except KeyError:
@@ -81,8 +81,11 @@ while WindowIsOpen:
 			print("ERROR INCONUE")
 			AuthError = "Erreur INCONUE"
 			StateOfCardReader = 2
+		"""
+		auth = Authentication(rfid=UIDWithoutSpace)
+		auth.add_passage_to_log()
 	print(AuthError,StateOfCardReader)
-	time.sleep(2)
+	time.sleep(1)
 	# Send the oldlog if the Dokos Server had problem
 	if SendOldLog and (time.time()-MomentOfNonSent<60):
 		FileToRead = open("HistoryOfPassage.log",mode="r")
