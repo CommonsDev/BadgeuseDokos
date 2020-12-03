@@ -47,7 +47,7 @@ ImageCanva.pack()
 ErrorLabel = Tk.Label(Window,text=AuthError,bg="#181818",fg="white")
 ErrorLabel.pack()
 
-while WindowIsOpen
+while WindowIsOpen:
 	StateOfCardReader=0
 	AuthError = ""
 	textShell = os.popen(cmd).read().strip()
