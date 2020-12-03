@@ -17,3 +17,7 @@ ldconfig
 cd ..
 rm libnfc-1.7.1.tar.bz2
 rm -Rf libnfc-1.7.1
+# Install the python library with pip
+pip3 install --upgrade pip
+pip3 install pygame
+pip3 install urllib3
