@@ -58,6 +58,8 @@ class ReadCard(threading.Thread):
 					AuthError = "Erreur INCONUE"
 					StateOfCardReader = 2
 			elif ("ERROR" in textShell):
+				print("On ne trouve pas le lecteur de carte NFC")
+				AuthError = "lecteur de carte non branché"
 				StateOfCardReader = 3
 			else:
 				StateOfCardReader = 2
@@ -80,6 +82,7 @@ class ReadCard(threading.Thread):
 						FileToWrite = open("HistoryOfPassage.log",mode="a")
 						FileToWrite.writelines(e.split(",")[0]+","+e.split(",")[1]+"\n")
 						FileToWrite.close()
+			print(AuthError,StateOfCardReader)
 			time.sleep(2)
 
 
