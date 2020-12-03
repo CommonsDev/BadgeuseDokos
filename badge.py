@@ -23,14 +23,17 @@ MomentOfNonSent = 0
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cmd = "nfc-poll|grep UID"
 
+Window = Tk.Tk()
+Window.config(background="#181818")
+
 def closeWindow():
 	global WindowIsOpen
-	WindowIsOpen = False
+	WindowIsOpen=False
 	Window.destroy()
 
+
 while WindowIsOpen:
-	Window = Tk.Tk()
-	Window.config(background="#181818")
+
 	nom_fichier = ""
 	#Print the state of the reader (waiting, valide card or not valide card)
 	print("TK :",StateOfCardReader)
@@ -99,5 +102,4 @@ while WindowIsOpen:
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
 				FileToWrite.writelines(e.split(",")[0]+","+e.split(",")[1]+"\n")
 				FileToWrite.close()
-	QuitButton = Tk.Button(Window,text="Quitter",bg="#181818",fg="white",command=closeWindow())
-	QuitButton.pack()
+	QuitButton = Tk.Button(Window,text="Quitter",bg="#181818",fg="white",command=closeWindow)
