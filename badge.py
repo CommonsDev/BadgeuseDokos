@@ -66,9 +66,7 @@ while WindowIsOpen:
 		except KeyError:
 			StateOfCardReader = 2
 		except :
-
-		auth = Authentication(rfid=UIDWithoutSpace)
-		auth.add_passage_to_log()
+			writeToFile(UIDWithoutSpace)
 	print(AuthError,StateOfCardReader)
 	
 	# Send the oldlog if the Dokos Server had problem
