@@ -90,7 +90,7 @@ class GUI(threading.Thread):
 		global WindowOpen
 		global StateOfCardReader
 		global AuthError
-		Window = Tk.Tk(screenName="NFC Reader")
+		Window = Tk.Tk()
 		Window.config(background="#181818")
 		nom_fichier = ""
 		#Print the state of the reader (waiting, valide card or not valide card)
