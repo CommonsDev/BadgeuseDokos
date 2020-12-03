@@ -33,14 +33,6 @@ NotAcceptImage = pygame.image.load("negative.png")
 Window.fill(gray)
 
 def writeToFile(rfid):
-	global MomentOfNonSent
-	global AuthError
-	global MomentOfNonSent
-	global SendOldLog
-	AuthError = "Attention le serveur est innacesible sauvegarde des passages en local"
-	StateOfCardReader = 1
-	SendOldLog = True
-	MomentOfNonSent = time.time()
 	date = datetime.now()
 	FileToWrite = open("HistoryOfPassage.log",mode="a")
 	FileToWrite.writelines(rfid+","+str(date)+"\n")
@@ -52,7 +44,9 @@ while WindowIsOpen:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			WindowIsOpen = False
-
+	Window.fill(gray)
+	Window.blit(tuxImage,[10,10])
+	pygame.display.flip()
 	textShell = os.popen(cmd).read().strip()
 	print("Texte Shell : ",textShell)
 	#Read the card
@@ -66,12 +60,16 @@ while WindowIsOpen:
 		except KeyError:
 			StateOfCardReader = 2
 		except :
+			AuthError = "Attention le serveur est innacesible sauvegarde des passages en local"
+			StateOfCardReader = 1
+			SendOldLog = True
+			MomentOfNonSent = time.time()
 			writeToFile(UIDWithoutSpace)
 	print(AuthError,StateOfCardReader)
 	
 	# Send the oldlog if the Dokos Server had problem
-	if SendOldLog and (time.time()-MomentOfNonSent>60):
-		print("Test de l'envoie du log :",SendOldLog,time.time()-MomentOfNonSent)
+	if SendOldLog and (time.time()-MomentOfNonSent>60*5):
+		Window.fill(gray)
 		Window.blit(DLImage,[10,10])
 		pygame.display.flip()
 		FileToRead = open("HistoryOfPassage.log",mode="r")
@@ -85,10 +83,6 @@ while WindowIsOpen:
 		AuthError = "Envoie des données locales au serveur"
 		SendOldLog = False
 		for e in OldLogList:
-			print("Test de la liste")
-			print(e)
-			eSplit = e.split(",")
-			print(eSplit)
 			try:
 				auth = Authentication(rfid=eSplit[0])
 				auth.add_passage_to_log(date=eSplit[1])
@@ -100,6 +94,7 @@ while WindowIsOpen:
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
 				FileToWrite.writelines(eSplit[0]+","+eSplit[1]+"\n")
 				FileToWrite.close()
+	Window.fill(gray)
 	if StateOfCardReader==1:
 		Window.blit(AcceptImage,[10,10])
 	elif StateOfCardReader==2:
