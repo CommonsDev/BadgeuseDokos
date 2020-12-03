@@ -48,7 +48,7 @@ def writeToFile(rfid):
 
 pygame.display.flip()
 
-while WindowIsOpen
+while WindowIsOpen:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			WindowIsOpen = False
