@@ -71,6 +71,7 @@ while WindowIsOpen:
 	
 	# Send the oldlog if the Dokos Server had problem
 	if SendOldLog and (time.time()-MomentOfNonSent<60):
+		print("Test de l'envoie du log :",SendOldLog,time.time()-MomentOfNonSent)
 		Window.blit(DLImage,[10,10])
 		pygame.display.flip()
 		FileToRead = open("HistoryOfPassage.log",mode="r")
@@ -83,16 +84,20 @@ while WindowIsOpen:
 		AuthError = "Envoie des données locales au serveur"
 		SendOldLog = False
 		for e in OldLogList:
+			print("Test de la liste")
+			print(e)
+			eSplit = e.split(",")
+			print(eSplit)
 			try:
-				auth = Authentication(rfid=e.split(",")[0])
-				auth.add_passage_to_log(date=e.split(",")[1])
+				auth = Authentication(rfid=eSplit[0])
+				auth.add_passage_to_log(date=eSplit[1])
 			except KeyError:
 				pass
 			except:
 				SendOldLog = True
 				MomentOfNonSent = time.time()
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
-				FileToWrite.writelines(e[0].split(",")[0]+","+e[0].split(",")[1]+"\n")
+				FileToWrite.writelines(eSplit[0]+","+eSplit[1]+"\n")
 				FileToWrite.close()
 	if StateOfCardReader==1:
 		Window.blit(AcceptImage,[10,10])
