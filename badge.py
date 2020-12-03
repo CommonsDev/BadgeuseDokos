@@ -61,8 +61,6 @@ class ReadCard(threading.Thread):
 				print("On ne trouve pas le lecteur de carte NFC")
 				AuthError = "lecteur de carte non branché"
 				StateOfCardReader = 3
-			else:
-				StateOfCardReader = 2
 
 			print(AuthError,StateOfCardReader)
 			time.sleep(2)
