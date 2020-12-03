@@ -72,7 +72,7 @@ while WindowIsOpen:
 	# Send the oldlog if the Dokos Server had problem
 	if SendOldLog and (time.time()-MomentOfNonSent<60):
 		Window.blit(DLImage,[10,10])
-		pygame.display.flip
+		pygame.display.flip()
 		FileToRead = open("HistoryOfPassage.log",mode="r")
 		OldLogString = FileToRead.read()
 		FileToRead.close()
@@ -92,7 +92,7 @@ while WindowIsOpen:
 				SendOldLog = True
 				MomentOfNonSent = time.time()
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
-				FileToWrite.writelines(e.split(",")[0]+","+e.split(",")[1]+"\n")
+				FileToWrite.writelines(e[0].split(",")[0]+","+e[0].split(",")[1]+"\n")
 				FileToWrite.close()
 	if StateOfCardReader==1:
 		Window.blit(AcceptImage,[10,10])
