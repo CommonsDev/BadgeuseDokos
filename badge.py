@@ -23,6 +23,11 @@ MomentOfNonSent = 0
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cmd = "nfc-poll|grep UID"
 
+def closeWindow():
+	global WindowIsOpen
+	WindowIsOpen = False
+	Window.destroy()
+
 while WindowIsOpen:
 	Window = Tk.Tk()
 	Window.config(background="#181818")
@@ -94,6 +99,5 @@ while WindowIsOpen:
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
 				FileToWrite.writelines(e.split(",")[0]+","+e.split(",")[1]+"\n")
 				FileToWrite.close()
-	Window.mainloop()
-	print(WindowIsOpen)
-	WindowIsOpen = False
+	QuitButton = Tk.Button(Window,text="Quitter",bg="#181818",fg="white",command=closeWindow())
+	QuitButton.pack()
