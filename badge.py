@@ -23,31 +23,29 @@ MomentOfNonSent = 0
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 cmd = "nfc-poll|grep UID"
 
-
-Window = Tk.Tk()
-Window.config(background="#181818")
-nom_fichier = ""
-#Print the state of the reader (waiting, valide card or not valide card)
-print("TK :",StateOfCardReader)
-if StateOfCardReader==0:
-	nom_fichier="tux.png"
-elif StateOfCardReader==1:
-	nom_fichier="accept.png"
-elif StateOfCardReader==2:
-	nom_fichier="negative.png"
-elif StateOfCardReader==3:
-	nom_fichier="usb.png"
-else:
-	nom_fichier="download.png"
-LoadImage = Image.open(nom_fichier)
-LoadImageTk = ImageTk.PhotoImage(LoadImage)
-ImageCanva = Tk.Canvas(Window,width=640,height=640,bg="#181818")
-ImageCanva.create_image(640/2,640/2,image=LoadImageTk)
-ImageCanva.pack()
-ErrorLabel = Tk.Label(Window,text=AuthError,bg="#181818",fg="white")
-ErrorLabel.pack()
-
 while WindowIsOpen:
+	Window = Tk.Tk()
+	Window.config(background="#181818")
+	nom_fichier = ""
+	#Print the state of the reader (waiting, valide card or not valide card)
+	print("TK :",StateOfCardReader)
+	if StateOfCardReader==0:
+		nom_fichier="tux.png"
+	elif StateOfCardReader==1:
+		nom_fichier="accept.png"
+	elif StateOfCardReader==2:
+		nom_fichier="negative.png"
+	elif StateOfCardReader==3:
+		nom_fichier="usb.png"
+	else:
+		nom_fichier="download.png"
+	LoadImage = Image.open(nom_fichier)
+	LoadImageTk = ImageTk.PhotoImage(LoadImage)
+	ImageCanva = Tk.Canvas(Window,width=640,height=640,bg="#181818")
+	ImageCanva.create_image(640/2,640/2,image=LoadImageTk)
+	ImageCanva.pack()
+	ErrorLabel = Tk.Label(Window,text=AuthError,bg="#181818",fg="white")
+	ErrorLabel.pack()
 	StateOfCardReader=0
 	AuthError = ""
 	textShell = os.popen(cmd).read().strip()
@@ -96,7 +94,6 @@ while WindowIsOpen:
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
 				FileToWrite.writelines(e.split(",")[0]+","+e.split(",")[1]+"\n")
 				FileToWrite.close()
-
-Window.mainloop()
-print(WindowIsOpen)
-WindowIsOpen = False
+	Window.mainloop()
+	print(WindowIsOpen)
+	WindowIsOpen = False
