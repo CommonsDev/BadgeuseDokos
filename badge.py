@@ -44,12 +44,12 @@ while WindowIsOpen:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			WindowIsOpen = False
+	AuthError=""
 	StateOfCardReader=0
 	Window.fill(gray)
 	Window.blit(tuxImage,[10,10])
 	pygame.display.flip()
 	textShell = os.popen(cmd).read().strip()
-	print("Texte Shell : ",textShell)
 	#Read the card
 	if (textShell.startswith("UID")):
 		UIDWithSpace = textShell.split(":")[1]
@@ -66,7 +66,6 @@ while WindowIsOpen:
 			SendOldLog = True
 			MomentOfNonSent = time.time()
 			writeToFile(UIDWithoutSpace)
-	print(AuthError,StateOfCardReader)
 	
 	# Send the oldlog if the Dokos Server had problem
 	if SendOldLog and (time.time()-MomentOfNonSent>60*5):
@@ -95,6 +94,8 @@ while WindowIsOpen:
 				FileToWrite = open("HistoryOfPassage.log",mode="a")
 				FileToWrite.writelines(eSplit[0]+","+eSplit[1]+"\n")
 				FileToWrite.close()
+
+	print(AuthError,StateOfCardReader)
 	Window.fill(gray)
 	if StateOfCardReader==1:
 		Window.blit(AcceptImage,[10,10])
@@ -103,4 +104,4 @@ while WindowIsOpen:
 	else:
 		Window.blit(tuxImage,[10,10])
 	pygame.display.flip()
-	time.sleep(1)
+	time.sleep(3)
