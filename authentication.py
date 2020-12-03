@@ -18,14 +18,15 @@ class Authentication:
             'data']
         return result['user'], result['customer']
 
-    def add_passage_to_log(self, type="None"):
+    def add_passage_to_log(self, date=None,type="None"):
         user, customer = self.get_user_and_customer_for_rfid()
-
+        if date==None:
+            date = str(dt.now())
         data = {
             'user': user,
             'customer': customer,
             'rfid': self.rfid,
-            'date': str(dt.now()),
+            'date': date,
             'type': type
         }
         return self.connector.insert_resource(resource=config.passage_log_resource_name, data=json.dumps(data))
