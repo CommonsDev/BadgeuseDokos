@@ -50,7 +50,7 @@ ErrorLabel.pack()
 StateOfCardReader=0
 AuthError = ""
 textShell = os.popen(cmd).read().strip()
-print("Texte Shell : "textShell)
+print("Texte Shell : ",textShell)
 #Read the card
 if (textShell.startswith("UID")):
 	UIDWithSpace = textShell.split(":")[1]
