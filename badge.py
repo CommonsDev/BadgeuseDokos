@@ -85,30 +85,39 @@ class ReadCard(threading.Thread):
 class GUI(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
-		def run():
-			global WindowOpen
-			global StateOfCardReader
-			global AuthError
-			Window = Tk.Tk(screenName="NFC Reader")
-			Window.config(background="#181818")
-			nom_fichier = ""
-			#Print the state of the reader (waiting, valide card or not valide card)
-			if StateOfCardReader==0:
-				nom_fichier="tux.png"
-			elif StateOfCardReader==1:
-				nom_fichier="accept.png"
-			elif StateOfCardReader==2:
-				nom_fichier="negative.png"
-			elif StateOfCardReader==3:
-				nom_fichier="usb.png"
-			else:
-				nom_fichier="download.png"
-			LoadImage = Image.open(nom_fichier)
-			LoadImageTk = ImageTk.PhotoImage(LoadImage)
-			PhotoCanva = tk.Canvas(Window,width=640,height=640,bg="#181818")
-			PhotoCanva.create_image(640/2,640/2,image=LoadImageTk)
-			PhotoCanva.pack()
-			ErrorLabel = tk.Label(Window,text=AuthError)
-			ErrorLabel.pack()
-			Window.mainloop()
-			WindowOpen=False
+	def run():
+		global WindowOpen
+		global StateOfCardReader
+		global AuthError
+		Window = Tk.Tk(screenName="NFC Reader")
+		Window.config(background="#181818")
+		nom_fichier = ""
+		#Print the state of the reader (waiting, valide card or not valide card)
+		if StateOfCardReader==0:
+			nom_fichier="tux.png"
+		elif StateOfCardReader==1:
+			nom_fichier="accept.png"
+		elif StateOfCardReader==2:
+			nom_fichier="negative.png"
+		elif StateOfCardReader==3:
+			nom_fichier="usb.png"
+		else:
+		nom_fichier="download.png"
+		LoadImage = Image.open(nom_fichier)
+		LoadImageTk = ImageTk.PhotoImage(LoadImage)
+		PhotoCanva = tk.Canvas(Window,width=640,height=640,bg="#181818")
+		PhotoCanva.create_image(640/2,640/2,image=LoadImageTk)
+		PhotoCanva.pack()
+		ErrorLabel = tk.Label(Window,text=AuthError,bg="#181818",fg="white")
+		ErrorLabel.pack()
+		Window.mainloop()
+		WindowOpen=False
+
+ReadingCard = ReadCard()
+TkWindow = GUI()
+
+TkWindow.start()
+ReadingCard.start()
+
+TkWindow.join()
+ReadingCard.join()
