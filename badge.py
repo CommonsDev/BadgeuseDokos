@@ -102,7 +102,7 @@ class GUI(threading.Thread):
 		elif StateOfCardReader==3:
 			nom_fichier="usb.png"
 		else:
-		nom_fichier="download.png"
+			nom_fichier="download.png"
 		LoadImage = Image.open(nom_fichier)
 		LoadImageTk = ImageTk.PhotoImage(LoadImage)
 		PhotoCanva = tk.Canvas(Window,width=640,height=640,bg="#181818")
