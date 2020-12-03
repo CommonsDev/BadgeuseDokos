@@ -63,6 +63,9 @@ class ReadCard(threading.Thread):
 				StateOfCardReader = 3
 			else:
 				StateOfCardReader = 2
+
+			print(AuthError,StateOfCardReader)
+			time.sleep(2)
 			# Send the oldlog if the Dokos Server had problem
 			if SendOldLog and (time.time()-MomentOfNonSent<60):
 				FileToRead = open("HistoryOfPassage.log",mode="r")
@@ -82,8 +85,6 @@ class ReadCard(threading.Thread):
 						FileToWrite = open("HistoryOfPassage.log",mode="a")
 						FileToWrite.writelines(e.split(",")[0]+","+e.split(",")[1]+"\n")
 						FileToWrite.close()
-			print(AuthError,StateOfCardReader)
-			time.sleep(2)
 
 
 class GUI(threading.Thread):
@@ -91,12 +92,13 @@ class GUI(threading.Thread):
 		threading.Thread.__init__(self)
 	def run(self):
 		global WindowOpen
-		global StateOfCardReader
-		global AuthError
+		"""global StateOfCardReader
+		global AuthError"""
 		Window = Tk.Tk()
 		Window.config(background="#181818")
 		nom_fichier = ""
 		#Print the state of the reader (waiting, valide card or not valide card)
+		print("TK :",StateOfCardReader)
 		if StateOfCardReader==0:
 			nom_fichier="tux.png"
 		elif StateOfCardReader==1:
