@@ -56,8 +56,11 @@ while WindowIsOpen:
 		UIDWithoutSpace = UIDWithSpace.replace("  ",":").strip()
 		print(UIDWithoutSpace)
 		try:
+			print("test1")
 			auth = Authentication(rfid=UIDWithoutSpace)
+			print("test2 ",auth.get_user_and_customer_for_rfid())
 			auth.add_passage_to_log()
+			print("test3")
 		except KeyError:
 			StateOfCardReader = 2
 		except :
