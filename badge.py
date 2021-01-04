@@ -56,12 +56,9 @@ while WindowIsOpen:
 		UIDWithoutSpace = UIDWithSpace.replace("  ",":").strip()
 		print(UIDWithoutSpace)
 		try:
-			print("test1")
 			auth = Authentication(rfid=UIDWithoutSpace)
-			print("test2 ",auth.get_user_and_customer_for_rfid())
 			auth.add_passage_to_log()
-			print("test3")
-		except KeyError:
+		except Authentication.RfidNotFound:
 			StateOfCardReader = 2
 		except :
 			AuthError = "Attention le serveur est innacesible sauvegarde des passages en local"
@@ -71,7 +68,7 @@ while WindowIsOpen:
 			writeToFile(UIDWithoutSpace)
 	
 	# Send the oldlog if the Dokos Server had problem
-	if SendOldLog and (time.time()-MomentOfNonSent>60):
+	if SendOldLog and (time.time()-MomentOfNonSent>300):
 		Window.fill(gray)
 		Window.blit(DLImage,[10,10])
 		pygame.display.flip()
@@ -89,7 +86,7 @@ while WindowIsOpen:
 			try:
 				auth = Authentication(rfid=e.split(',')[0])
 				auth.add_passage_to_log(date=e.split(',')[1])
-			except KeyError:
+			except Authentication.RfidNotFound:
 				pass
 			except:
 				SendOldLog = True
@@ -107,4 +104,4 @@ while WindowIsOpen:
 	else:
 		Window.blit(tuxImage,[10,10])
 	pygame.display.flip()
-	time.sleep(3)
+	time.sleep(4)
