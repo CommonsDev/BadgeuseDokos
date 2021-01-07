@@ -16,6 +16,8 @@ res = (720,720)
 StateOfCardReader = 0 # 0 Wait a card, 1 Card is valid, 2 card is not valide, 3 sent old log
 AuthError = ""
 WindowIsOpen = True
+user = ""
+customer = ""
 
 textShell=""
 SendOldLog = False
@@ -55,8 +57,10 @@ while WindowIsOpen:
 		UIDWithSpace = textShell.split(":")[1]
 		UIDWithoutSpace = UIDWithSpace.replace("  ",":").strip()
 		print(UIDWithoutSpace)
+		StateOfCardReader = 1
 		try:
 			auth = Authentication(rfid=UIDWithoutSpace)
+			user,customer = auth.get_user_and_customer_for_rfid()
 			auth.add_passage_to_log()
 		except Authentication.RfidNotFound:
 			StateOfCardReader = 2
@@ -85,6 +89,7 @@ while WindowIsOpen:
 		for e in OldLogList:
 			try:
 				auth = Authentication(rfid=e.split(',')[0])
+				auth.get_user_and_customer_for_rfid()
 				auth.add_passage_to_log(date=e.split(',')[1])
 			except Authentication.RfidNotFound:
 				pass
@@ -99,9 +104,16 @@ while WindowIsOpen:
 	Window.fill(gray)
 	if StateOfCardReader==1:
 		Window.blit(AcceptImage,[10,10])
+		policy=pygame.font.Font(None,24)
+		printUser = policy.render("Utilisateur : "+user,True,pygame.Color("#000"))
+		Window.blit(printUser,[700,10])
+		printCustomer = policy.render("Client : "+customer,True,pygame.Color("#000"))
+		Window.blit(printCustomer,[700,400])
 	elif StateOfCardReader==2:
 		Window.blit(NotAcceptImage,[10,10])
 	else:
 		Window.blit(tuxImage,[10,10])
 	pygame.display.flip()
+	user = ""
+	customer = ""
 	time.sleep(4)
