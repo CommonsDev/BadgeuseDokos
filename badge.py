@@ -2,6 +2,7 @@ import config
 import urllib3
 import json
 from authentication import Authentication
+import authentication
 import pygame
 import threading
 from datetime import datetime
@@ -62,7 +63,7 @@ while WindowIsOpen:
 			auth = Authentication(rfid=UIDWithoutSpace)
 			user,customer = auth.get_user_and_customer_for_rfid()
 			auth.add_passage_to_log()
-		except Authentication.RfidNotFound:
+		except authentication.RfidNotFound:
 			StateOfCardReader = 2
 		except :
 			AuthError = "Attention le serveur est innacesible sauvegarde des passages en local"
@@ -91,7 +92,7 @@ while WindowIsOpen:
 				auth = Authentication(rfid=e.split(',')[0])
 				auth.get_user_and_customer_for_rfid()
 				auth.add_passage_to_log(date=e.split(',')[1])
-			except Authentication.RfidNotFound:
+			except authentication.RfidNotFound:
 				pass
 			except:
 				SendOldLog = True
@@ -104,11 +105,6 @@ while WindowIsOpen:
 	Window.fill(gray)
 	if StateOfCardReader==1:
 		Window.blit(AcceptImage,[10,10])
-		policy=pygame.font.Font(None,24)
-		printUser = policy.render("Utilisateur : "+user,True,pygame.Color("#000"))
-		Window.blit(printUser,[700,10])
-		printCustomer = policy.render("Client : "+customer,True,pygame.Color("#000"))
-		Window.blit(printCustomer,[700,400])
 	elif StateOfCardReader==2:
 		Window.blit(NotAcceptImage,[10,10])
 	else:

@@ -27,11 +27,16 @@ class Authentication:
             return result['user'], result['customer']
 
     def add_passage_to_log(self, date=None,type="None"):
-        user_customer = self.get_user_and_customer_for_rfid()
+        try : 
+            user,customer = self.get_user_and_customer_for_rfid()
+        except RfidNotFound:
+            user = None
+            customer = None
+            raise RfidNotFound
+        if user==None and customer==None:
+            raise RfidNotFound
         if date==None:
             date = str(dt.now())
-        if user_customer == None:
-            raise 
         data = {
             'user': user,
             'customer': customer,
