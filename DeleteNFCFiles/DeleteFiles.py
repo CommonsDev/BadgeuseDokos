@@ -9,13 +9,16 @@ def separeFileAndDir(path):
 	"""
 
 	"""
-	imageFiles = os.listdir(path)
 	files = []
 	directory = []
+	try :
+		imageFiles = os.listdir(path)
+	except:
+		return files,directory
 	for e in imageFiles:
-		if os.path.isfile(e):
+		if os.path.isfile(path+e):
 			files.append(e)
-		elif os.path.isdir(e):
+		elif os.path.isdir(path+e):
 			directory.append(e)
 	return files,directory
 
@@ -43,15 +46,17 @@ def deleteAllSearchFileInPath(path,stringsToSearch,rec=False):
 		j = 0
 		while i<len(directories):
 			search_in_directory = False
-			while j<len(stringsToSearch):
+			try:
 				os.chdir(path+directories[i]+"/")
+			except:
+				break:
+			while j<len(stringsToSearch):
 				if stringsToSearch[j] in directories[i].lower():
 					shutil.rmtree(path+directories[i])
 					break
 				textShell = os.popen(cmd+stringsToSearch[j])
 				if textShell !="":
 					search_in_directory=True
-					break
 				j+=1
 			j=0
 			if search_in_directory==True:
