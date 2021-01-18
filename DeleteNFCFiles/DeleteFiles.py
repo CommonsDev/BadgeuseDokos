@@ -4,6 +4,7 @@ import os # To open the files
 from pathlib import Path
 import shutil
 import configFiles
+import time
 
 def separeFileAndDir(path):
 	"""
@@ -49,10 +50,11 @@ def deleteAllSearchFileInPath(path,stringsToSearch,rec=False):
 			try:
 				os.chdir(path+directories[i]+"/")
 			except:
-				break:
+				break
 			while j<len(stringsToSearch):
 				if stringsToSearch[j] in directories[i].lower():
 					shutil.rmtree(path+directories[i])
+					print("Le dossier "+path+directories[i]+" a été supprimé.")
 					break
 				textShell = os.popen(cmd+stringsToSearch[j])
 				if textShell !="":
@@ -74,4 +76,7 @@ def deleteAllSearchFileInPath(path,stringsToSearch,rec=False):
 			j=0
 			i+=1
 
+debut = time.time()
 deleteAllSearchFileInPath(configFiles.path,configFiles.stringsToSearch,configFiles.rec)
+fin = time.time()
+print("Temps d'éxecution en s : ",fin-debut)
