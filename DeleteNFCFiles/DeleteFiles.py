@@ -1,3 +1,4 @@
+# coding: utf-8
 # Import all the library
 import os # To open the files
 from pathlib import Path
@@ -16,8 +17,6 @@ def separeFileAndDir(path):
 			files.append(e)
 		elif os.path.isdir(e):
 			directory.append(e)
-		else:
-			print(e," is not a file or a dir !")
 	return files,directory
 
 def deleteAllSearchFileInPath(path,stringsToSearch,rec=False):
@@ -25,13 +24,17 @@ def deleteAllSearchFileInPath(path,stringsToSearch,rec=False):
 
 	"""
 	files,directories = separeFileAndDir(path)
+	search_in_directory = False
+	cmd = "ls -R | grep "
+	textShell = ""
 	if rec==True:
 		i = 0
 		j = 0
 		while i<len(files):
 			while j<len(stringsToSearch):
 				if stringsToSearch[j] in files[i].lower():
-					os.remove(path+"/"+files[i])
+					os.remove(path+files[i])
+					print(path+files[i]," a été supprimé.")
 					break
 				j+=1
 			j=0
@@ -39,13 +42,20 @@ def deleteAllSearchFileInPath(path,stringsToSearch,rec=False):
 		i = 0
 		j = 0
 		while i<len(directories):
+			search_in_directory = False
 			while j<len(stringsToSearch):
+				os.chdir(path+directories[i]+"/")
 				if stringsToSearch[j] in directories[i].lower():
-					shutil.rmtree(path+'/'+directories[i])
+					shutil.rmtree(path+directories[i])
+					break
+				textShell = os.popen(cmd+stringsToSearch[j])
+				if textShell !="":
+					search_in_directory=True
 					break
 				j+=1
 			j=0
-			deleteAllSearchFileInPath(path+"/"+directories[i],stringsToSearch,rec)
+			if search_in_directory==True:
+				deleteAllSearchFileInPath(path+directories[i]+"/",stringsToSearch,rec)
 			i+=1
 	else:
 		i = 0
