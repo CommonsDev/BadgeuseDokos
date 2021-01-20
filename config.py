@@ -12,3 +12,6 @@ passage_log_resource_name = "History Of Passage"
 
 #Could be None, In or Out
 badging_type = "None"
+
+#Could be "min" for 300 * 300 p and any other things for 720 * 720 p
+resolution = "min"

@@ -13,6 +13,8 @@ import sys
 gray = (30,30,30)
 white = (255,255,255)
 res = (720,720)
+if config.resolution=="min":
+	res=(300,300)
 
 StateOfCardReader = 0 # 0 Wait a card, 1 Card is valid, 2 card is not valide, 3 sent old log
 AuthError = ""
@@ -32,6 +34,11 @@ tuxImage = pygame.image.load("tux.png")
 DLImage = pygame.image.load("download.png")
 AcceptImage = pygame.image.load("accept.png")
 NotAcceptImage = pygame.image.load("negative.png")
+if config.resolution=="min":
+	tuxImage = pygame.image.load("tux_mini.png")
+	DLImage = pygame.image.load("download_mini.png")
+	AcceptImage = pygame.image.load("accept_mini.png")
+	NotAcceptImage = pygame.image.load("negative_mini.png")	
 
 Window.fill(gray)
 
