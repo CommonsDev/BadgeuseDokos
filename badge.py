@@ -54,6 +54,13 @@ while WindowIsOpen:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			WindowIsOpen = False
+			exit()
+		elif event.type == pygame.locals.KEYDOWN and event.key == K_ESCAPE
+			WindowIsOpen = False
+			exit()
+		else event.type == pygame.MOUSEBUTTONUP:
+			WindowIsOpen == False
+			exit()
 	AuthError=""
 	StateOfCardReader=0
 	Window.fill(gray)
