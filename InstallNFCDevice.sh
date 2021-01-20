@@ -5,13 +5,12 @@ apt upgrade
 apt install pcsc-tools pcscd libpcsclite-dev libpcsclite1 libusb-dev
 apt install git binutils make csh g++ sed gawk autoconf automake autotools-dev libglib2.0-dev liblzma-dev libtool 
 # Install software to read the card on NFC reader
-# Download libnfc and unzip the tar file
 git clone https://github.com/jpwidera/libnfc.git
 cd libnfc/
 #Configure and install libnfc
 autoreconf -is
 ./configure --prefix=/usr --sysconfdir=/etc
-make 
+make
 make install
 ldconfig
 # Return to the original path and remove the files necessary for the installation
