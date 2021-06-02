@@ -12,7 +12,7 @@ import sys
 
 gray = (30,30,30)
 white = (255,255,255)
-res = (720,720)
+res = (850,680) #Adapter à la resolution de l'ecran utilise
 if config.resolution=="min":
 	res=(300,300)
 
@@ -26,7 +26,7 @@ textShell=""
 SendOldLog = False
 MomentOfNonSent = 0
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-cmd = "nfc-poll|grep UID"
+cmd = "nfc-list|grep UID"
 
 pygame.display.set_caption("Badgeuse")
 Window = pygame.display.set_mode(res)
@@ -123,4 +123,4 @@ while WindowIsOpen:
 	pygame.display.flip()
 	user = ""
 	customer = ""
-	time.sleep(4)
+	time.sleep(3)
