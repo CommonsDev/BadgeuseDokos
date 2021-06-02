@@ -35,6 +35,9 @@ Assurez-vous que le lecteur de badge soit bien connecté au bon port USB (leport
 
 Une fois le lecteur de badge bien connecté et reconnu par la Raspberry, exécutez le document « InstallNFCDevice.sh » via un terminal grâce à la commande « sudo bash InstallNFCDevice.sh ». Confirmez par O ou Y sur le terminal lorsque cela est requis. Le processus prend quelques minutes.
 
+Quand les commandes ont fini de s'exécuter vous pouvez essayer d'exécuter la commande nfc-poll pour savoir si l’installation s’est faite avec succès. Si jamais un message apparaît disant que “nfc-poll : commande introuvable” c’est que l’installation n’a pas réussi.
+Dès que ces commandes sont faites, l'installation des logiciels pour utiliser le lecteur NFC est réalisée
+
 ## Lancement automatique de la badgeuse
 
 Déplacez le dossier "lancement.sh" à la racine du dossier /home.
@@ -43,7 +46,29 @@ Dans un terminal, lancez la commande « sudo nano /etc/xdg/lxsession/LXDE-pi/aut
 Sous la dernière ligne (« @xscreensaver… »), rajoutez la ligne de code « @/home/pi/lancement.sh ». Sauvegardez et quittez le document.
 
 
-# Configuration de DOKOS pour afficher l'API 
+## Configuration pour accéder à votre Dokos
+
+Une fois que l’installation est réalisée, il faut configurer le logiciel de badgeuse pour pouvoir se connecter à Dokos. Il y a besoin de plusieurs choses
+pour pouvoir se connecter à Dokos. 
+
+Ces informations seront à mettre dans le fichier config.py :
+
+
+- Dans un premier temps, vous devez accéder au serveur dokos avec l’user Administrator à partir de votre navigateur web. Une fois cela fait accéder aux
+utilisateurs pour cela tapez “Utilisateur Liste” dans la barre de recherche ensuite une fois arriver dans la liste des utilisateurs.
+
+Allez voir l’utilisateur Administrator en cliquant dessus, une fois sur la page de l'utilisateur descendez la page jusqu’à arriver à Accès API, cliquer sur le texte pour voir apparaître le bouton “Générer des clés”
+
+Cliquez sur ce bouton pour avoir les clés. Dans un premier temps vous allez voir apparaître un message dans une fenêtre au-dessus du site web avec la clé
+à mettre dans “dokos_token” du fichier config.py.
+
+- Ensuite vous allez apercevoir dans la page web la clé à mettre dans “dokos_client” cette clé est la case clé API
+
+- Pour remplir la ligne “api_url” du fichier config.py il suffit de taper l’URL du site par lequel vous accédez à votre serveur dokos (par exemple https://
+monsitedokos.fr) et ensuite de placer un /api (par exemple https://monsitedokos.fr/api) après cette URL. 
+
+
+# Configuration de DOKOS pour activer l'API 
 
 Code modifié sur Dokos (pour les développeurs)
 https://github.com/Elronde62/Dokos-badge-management
