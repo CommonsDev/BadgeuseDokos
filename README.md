@@ -10,7 +10,7 @@ Plus d'informations : https://movilab.org/wiki/Syst%C3%A8me_de_badge_basé_sur_D
 
 Connectez l’écran, le clavier, la souris, le lecteur de badge, la carte SD sur la Raspberry et activez l’alimentation. La Raspberry devrait se lancer après quelques secondes. Assurez-vous que le lecteur de badge soit connecté au bon port USB (de préférence le port bleu supérieur).
 
-## Configuration de la Raspberry
+## Configuration de la Raspberry
 
 Configurez la langue, le type de clavier, la timezone, l’heure, la date, la LAN zone, le réseau Wi-Fi et la taille de l’écran dans les paramètres de la Raspberry (onglet Préférences).
 
