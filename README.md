@@ -15,6 +15,7 @@ Connectez l’écran, le clavier, la souris, le lecteur de badge, la carte SD su
 Configurez la langue, le type de clavier, la timezone, l’heure, la date, la LAN zone, le réseau Wi-Fi et la taille de l’écran dans les paramètres de la Raspberry (onglet Préférences).
 
 ## Formater la carte SD
+
 Formatez la carte SD
 Commencez par formater la carte SD de la Raspberry via votre ordinateur. (Sur Windows,  utiliser le logiciel SD Card Formatter, téléchargeable sous le lien suivant : https://sd-card-formatter.fr.uptodown.com/windows)
 
@@ -25,11 +26,12 @@ https://mega.nz/folder/6uR0SYLS#t4DJRQLX6F-Uv-i7jCaCKQ
 
 
 ## Importation des documents
+
 Ajoutez le dossier git dans le dossier /home/pi :
 
 Commande  : git clone https://github.com/CommonsDev/BadgeuseDokos.git 
 
-## Installation du lecteur NFC
+## Installation du lecteur NFC
 
 Assurez-vous que le lecteur de badge soit bien connecté au bon port USB (leport bleu supérieur). Vous pouvez vérifier que la Raspberry reconnaisse le lecteur en tapant la commande « lsusb » dans un terminal. Cette commande permet de lister tous les périphériques USB connectés.
 
@@ -46,7 +48,7 @@ Dans un terminal, lancez la commande « sudo nano /etc/xdg/lxsession/LXDE-pi/aut
 Sous la dernière ligne (« @xscreensaver… »), rajoutez la ligne de code « @/home/pi/lancement.sh ». Sauvegardez et quittez le document.
 
 
-## Configuration pour accéder à votre Dokos
+## Configuration pour accéder à votre Dokos
 
 Une fois que l’installation est réalisée, il faut configurer le logiciel de badgeuse pour pouvoir se connecter à Dokos. Il y a besoin de plusieurs choses
 pour pouvoir se connecter à Dokos. 
@@ -68,7 +70,7 @@ Cliquez sur ce bouton pour avoir les clés. Dans un premier temps vous allez voi
 monsitedokos.fr) et ensuite de placer un /api (par exemple https://monsitedokos.fr/api) après cette URL. 
 
 
-# Configuration de DOKOS pour activer l'API 
+# Configuration de DOKOS pour activer l'API 
 
 Code modifié sur Dokos (pour les développeurs)
 https://github.com/Elronde62/Dokos-badge-management
