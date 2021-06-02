@@ -1,7 +1,7 @@
 # BadgeuseDokos
 Système de badge pour espace de coworking basé sur Dokos. Utilisation d’un lecteur RFID branché à un Raspberry et intégration dans l’ERP du lieu (ici DOKOS).
 
-Plus d'informations : https://movilab.org/wiki/Syst%C3%A8me_de_badge_basé_sur_Dokos
+Plus d'informations : https://movilab.org/wiki/Système_de_badge_basé_sur_Dokos
 
 
 # Installation : 
